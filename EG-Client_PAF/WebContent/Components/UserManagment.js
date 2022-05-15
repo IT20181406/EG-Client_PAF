@@ -70,7 +70,7 @@ $(document).on(
 			$("#email").val($(this).closest("tr").find('td:eq(1)').text());
 			$("#password").val($(this).closest("tr").find('td:eq(2)').text());
 			$("#AccountNo").val($(this).closest("tr").find('td:eq(3)').text());
-			$("#otp").val($(this).closest("tr").find('td:eq(4)').text());
+			
 			
 		});
 
@@ -133,13 +133,6 @@ function validateProjectForm() {
 		return "Insert Password";
 	}
 	
-
-	 
-	 var tmpotp = $("#otp").val().trim();
-	 if (!$.isNumeric(tmpotp)) 
-	 {
-		 return "Insert otp";
-	 }
 
 
 	return true;

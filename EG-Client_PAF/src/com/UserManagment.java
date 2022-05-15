@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Random;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,6 +14,7 @@ public class UserManagment {
 
 	private Connection connect() {
 		Connection con = null;
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -26,7 +28,9 @@ public class UserManagment {
 		return con;
 	}
 
-	public String insertProject(String name, String email, String password,String AccountNo, String otp, String status) {
+	public String insertProject(String name, String email, String password,String AccountNo, String status) {
+		Random random = new Random();
+		int otp = random.nextInt(123456);
 		String output = "";
 		try {
 			Connection con = connect();
@@ -43,8 +47,8 @@ public class UserManagment {
 			preparedStmt.setString(3, email);
 			preparedStmt.setString(4, password);
 			preparedStmt.setString(5, AccountNo);
-			preparedStmt.setString(6, otp);
-			preparedStmt.setString(7, "In Active");
+			preparedStmt.setInt(6, otp);
+			preparedStmt.setString(7, "Inactive");
 
 			// execute the statement
 			preparedStmt.execute();
@@ -110,7 +114,7 @@ public class UserManagment {
 		return output;
 	}
 
-	public String updateProject(String id, String name, String email, String password,String AccountNo, String otp) {
+	public String updateProject(String id, String name, String email, String password,String AccountNo) {
 		String output = "";
 
 		try {
@@ -121,7 +125,7 @@ public class UserManagment {
 			}
 
 			// create a prepared statement
-			String query = "UPDATE user SET name=?,email=?,password=?,AccountNo=?,otp=? WHERE id=?";
+			String query = "UPDATE user SET name=?,email=?,password=?,AccountNo=? WHERE id=?";
 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 
@@ -131,8 +135,7 @@ public class UserManagment {
 			preparedStmt.setString(2, email);
 			preparedStmt.setString(3, password);
 			preparedStmt.setString(4, AccountNo);
-			preparedStmt.setString(5, otp);
-			preparedStmt.setInt(6, Integer.parseInt(id));
+			preparedStmt.setInt(5, Integer.parseInt(id));
 
 			// execute the statement
 			preparedStmt.execute();

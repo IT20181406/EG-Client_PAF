@@ -48,8 +48,7 @@ public class UserManagmentAPI extends HttpServlet {
 				request.getParameter("email"),
 				request.getParameter("password"),
 				request.getParameter("AccountNo"),
-				request.getParameter("otp"),
-				request.getParameter("status"));
+                request.getParameter("status"));
 
 		response.getWriter().write(output);
 
@@ -66,8 +65,8 @@ public class UserManagmentAPI extends HttpServlet {
 				paras.get("name").toString(), 
 				paras.get("email").toString(),
 				paras.get("password").toString(), 
-				paras.get("AccountNo").toString(),
-				paras.get("otp").toString() 
+				paras.get("AccountNo").toString()
+				
 				
 				
 
